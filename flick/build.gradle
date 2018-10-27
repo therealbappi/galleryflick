@@ -1,0 +1,36 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$versions.dokka"
+  }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.dokka-android'
+
+android {
+  compileSdkVersion versions.compileSdk
+  resourcePrefix "flick_"
+
+  defaultConfig {
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.compileSdk
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+}
+
+dependencies {
+  implementation "com.android.support:appcompat-v7:$versions.supportLib"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
